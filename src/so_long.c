@@ -40,20 +40,51 @@ int	key_hook(int keycode, t_game *game)
 
 int 	init_map(t_game *game, char *map_name)
 {
-	FILE	*ptr;
+	int 	fd;
+	char	*line;
+	int 	ret;
 	int 	count;
 	char 	*map;
-	char 	buf[1024 + 1]; // recheck pk
 
-	ptr = open_s(map_name, r);
-	if (ptr == NULL)
+	count = 0;
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
 	{
-		ft_putendl_fd("file cannot be read", 2)
+		ft_putendl_fd("file cannot be read", 2);
 		exit (0);
 	}
-	map =
+	line = 0;
+	ret = get_next_line(fd, &line);
 
+	//si count = 0, all characters must be 1
+	//if last line, all characters must be 1
+	//if nb character different par line, ko
+	//if no E or P, ko
+	while (ret > 0)
+	{
+		count++;
+		int endline = ft_strlen(line) - 2;
 
+		if (line[0] != '1' || line[endline] != '1')
+		{
+
+			printf("\nerror in line %d on character number %d\n", count, endline + 1);
+			exit (0);
+		}
+		write(1, line, ft_strlen(line));
+
+		write(1, "\n", 1);
+		free(line);
+		line = 0;
+		ret = get_next_line(fd, &line);
+	}
+	if (ret == 0)
+	{
+		write(1, line, ft_strlen(line));
+		write(1, "\n", 1);
+		free(line);
+		line = 0;
+	}
 }
 
 int 	init_struc(t_game *game)
@@ -70,6 +101,7 @@ int 	main (int argc, char** argv)
 	t_game game;
 
 	check_arg(argc, argv);
+	init_map(&game, argv[1]);
 	init_struc(&game);
 
 	//printf("num move value is %d", game.numb_move);

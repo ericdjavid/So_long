@@ -1,8 +1,13 @@
 NAME = SOLONG
 LIBFT = libft/libft.a
 FLAGS = -Wall -Wextra -Werror
-SRC = src/so_long.c
-INC = inc/so_long.h
+SRC =   src/so_long.c               \
+        gnl/get_next_line.c         \
+        gnl/get_next_line_utils.c   \
+
+INC =   inc/so_long.h           \
+        gnl/get_next_line.h     \
+
 LIB = -L ./libft -lft -L ./mlx -lmlx -lXext -lX11
 
 all: $(NAME)
