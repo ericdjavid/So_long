@@ -2,6 +2,9 @@ NAME = SOLONG
 LIBFT = libft/libft.a
 FLAGS = -Wall -Wextra -Werror
 SRC =   src/so_long.c               \
+        src/map_errors.c            \
+        src/draw_map.c              \
+        src/utils.c                 \
         gnl/get_next_line.c         \
         gnl/get_next_line_utils.c   \
 
