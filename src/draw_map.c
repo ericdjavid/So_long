@@ -12,19 +12,6 @@
 
 #include "../inc/so_long.h"
 
-
-void	check_for_elements(t_game *game, int x, int y, int numb)
-{
-	if (game->map[x + numb] == 'P')
-	{
-		draw_square(game, game->player, x * 40, y * 40);
-	}
-	if (game->map[x + numb] == 'C')
-		draw_square(game, game->collectible, x * 40, y * 40);
-	if (game->map[x + numb] == 'E')
-		draw_square(game, game->exit, x * 40, y * 40);
-}
-
 void 	draw_square(t_game *game, t_img *img, int x, int y)
 {
 	unsigned int	color;
@@ -46,34 +33,60 @@ void 	draw_square(t_game *game, t_img *img, int x, int y)
 	}
 }
 
+void	check_for_elements(t_game *game, int x, int y, int z, int numb)
+{
+	if (game->map[z + numb] == 'P')
+		draw_square(game, game->player, x, y * 40);
+	if (game->map[z + numb] == 'C')
+		draw_square(game, game->collectible, x, y * 40);
+	if (game->map[z + numb] == 'E' || game->map[z + numb] == 'X')
+		draw_square(game, game->exit, x, y * 40);
+}
+
+
 void	draw_map(t_game *game)
 {
 	int	x;
 	int y;
 	int numb;
+	int z;
 
-	y = 0;
 	numb = 0;
-
-	game->mlx.mlx_img = mlx_new_image(game->mlx.mlx, game->map_width * 40, game->map_height * 40);
-	while (y < game->map_height)
+	y = 0;
+	x = -40;
+	while(y < game->line_number)
 	{
-		x = 0;
-		while (x < game->map_width)
+		z = 0;
+		while (z < (game->total_line_char))
 		{
-			if (game->map[x + numb] == '1')
-				draw_square(game, game->tree, x * 40, y * 40);
+			if (game->map[z + numb] == '1')
+				draw_square(game, game->tree, x += 40, y * 39);
 			else
 			{
-				draw_square(game, game->ground, x * 40, y * 40);
-				check_for_elements(game, x, y, numb);
+				draw_square(game, game->ground, x += 40, y * 39);
+				check_for_elements(game, x, y, z, numb);
 			}
-			x++;
+		z++;
 		}
 		y++;
 		numb = game->total_line_char * y;
-		game->player_position = x + numb;
 	}
 
+//	{
+//		x = 0;
+//		while (x < game->map_width)
+//		{
+//			if (game->map[x + numb] == '1')
+//				draw_square(game, game->tree, x, y);
+//			else
+//			{
+//				draw_square(game, game->ground, x, y);
+//				check_for_elements(game, x, y, numb);
+//			}
+//			x++;
+//		}
+//		y++;
+//		numb = game->total_line_char * y;
+//	}
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win, game->mlx.mlx_img, 0, 0);
 }

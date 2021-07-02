@@ -26,6 +26,13 @@ typedef struct s_mlx
 
 } t_mlx;
 
+
+typedef struct s_coord
+{
+	int x;
+	int y;
+} t_coord;
+
 typedef struct s_game
 {
 	t_mlx	mlx;
@@ -39,17 +46,12 @@ typedef struct s_game
 	t_img	*exit;
 	char	*map;
 	int 	total_line_char;
-	int 	player_position;
-	int 	player_position_y;
-
+	int 	line_number;
+	char 	*player_position;
+	int 	collected;
 
 } t_game;
 
-typedef struct s_coord
-{
-	int x;
-	int y;
-} t_coord;
 
 void 			check_arg(int argc, char** argv);
 int				key_hook(int keycode, t_game *game);
@@ -61,7 +63,7 @@ void 			draw_square(t_game *game, t_img *img, int x, int y);
 unsigned int	mlx_get_pixel(t_img *img, int x, int y);
 void			mlx_draw_pixel(t_img *mlx_img, int x, int y, int color);
 unsigned int	mlx_rgb_to_int(int o, int r, int g, int b);
-void			check_for_elements(t_game *game, int x, int y, int numb);
+void			check_for_elements(t_game *game, int x, int y, int z, int numb);
 
 
 #endif

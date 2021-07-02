@@ -55,19 +55,67 @@ void 	check_arg(int argc, char** argv)
 
 int		key_hook(int keycode, t_game *game)
 {
-	printf("%d - Hello from key_hook!\n", keycode);
+	//TODO problem when 2 exits
+	if (ft_strchr(game->map, 'C') == NULL)
+		while (ft_strchr(game->map, 'E'))
+			*ft_strchr(game->map, 'E') = 'X';
 	if (keycode == 65307)
 		mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_win);
+
 	if (keycode == 119)
 	{
-		game->map[game->player_position] = '0';
-
-	//	game->map[game->player_position + game->total_line_char] = 'P';
-		draw_map(game);
-
-	//	printf("\n player position y is %d\n", game->player_position_y);
-
+		char *ptr = strchr(game->map, 'P');
+		int i = -1;
+		while (++i < game->total_line_char)
+			++ptr;
+		if (*ptr != '1' && *ptr != 'E')
+		{
+			*ptr = 'P';
+			ptr = ft_strchr(game->map, 'P');
+			*ptr = '0';
+		}
+		texture_load(game, &game->player, "./img/link1.xpm");
 	}
+
+	if (keycode == 97)
+	{
+		char *ptr = ft_strchr(game->map, 'P');
+		int i = -1;
+		while (++i < game->total_line_char)
+			--ptr;
+		if (*ptr != '1' && *ptr != 'E')
+		{
+			*ptr = 'P';
+			while (--i >= 0)
+				++ptr;
+			*ptr = '0';
+		}
+		texture_load(game, &game->player, "./img/link_up.xpm");
+	}
+
+	if (keycode == 100)
+	{
+		char *ptr = ft_strchr(game->map, 'P');
+		if ((*++ptr != '1' && *ptr != 'E'))
+		{
+			*--ptr = '0';
+			*++ptr = 'P';
+		}
+		texture_load(game, &game->player, "./img/link_right.xpm");
+	}
+	if (keycode == 115)
+	{
+		char *ptr = ft_strchr(game->map, 'P');
+		if (*--ptr != '1' && *ptr != 'E')
+		{
+			*++ptr = '0';
+			*--ptr = 'P';
+		}
+		texture_load(game, &game->player, "./img/link_left.xpm");
+	}
+	if (ft_strchr(game->map, 'X') == NULL && ft_strchr(game->map, 'E') == NULL)
+		exit(1);
+	draw_map(game);
 
 }
 
@@ -94,26 +142,25 @@ int 	init_map(t_game *game, char *map_name)
 	checkwalls(line);
 	first_line_char_sum = strlen(line);
 
-	//TODO if no E or P, ko
+
 	while (ret > 0)
 	{
 		count++;
 		int endline = ft_strlen(line) - 1;
 		if (line[0] != '1' || line[endline] != '1')
 		{
-			printf("\nerror in line %d on character number %d\n", count, endline + 1);
+			ft_putendl_fd("Wall missing in the border", 2);
 			exit (0);
 		}
 		whole_chars = ft_strjoin(whole_chars, line);
-		write(1, line, ft_strlen(line));
-		write(1, "\n", 1);
+
 		free(line);
 		line = 0;
 		ret = get_next_line(fd, &line);
 		ft_strjoin(whole_chars, line);
 		if ((strlen(line)) != first_line_char_sum)
 		{
-			printf("ret is %d , map is not rectangular, line is %d and first line is %d", ret, ft_strlen(line), first_line_char_sum);
+			ft_putendl_fd("map is not rectangular", 2);
 			exit (0);
 		}
 		if (ret == 0)
@@ -127,26 +174,34 @@ int 	init_map(t_game *game, char *map_name)
 			line = 0;
 		}
 	}
+	if ((ft_strchr(whole_chars, 'P') == NULL) || (ft_strchr(whole_chars, 'E') == NULL) ||
+	(ft_strchr(whole_chars, 'C') == NULL))
+	{
+		ft_putendl_fd("Missing one player, one collectible or one exit", 2);
+		exit (0);
+	}
 	game->map_height = count * 40;
 	game->map_width = first_line_char_sum * 40;
 	game->map = whole_chars;
 	game->total_line_char = first_line_char_sum;
-
-	//TODO don't forget to close
+	game->line_number = count;
+	fd = close(fd);
 }
 
 int 	init_struc(t_game *game)
 {
 	game->numb_move = 0;
+	game->collected = 0;
 	game->mlx.mlx = mlx_init();
 	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx, game->map_width, game->map_height, "SO_LONG_EDJ");
+	game->mlx.mlx_img = mlx_new_image(game->mlx.mlx, game->map_width, game->map_height);
 	texture_init(game);
-	draw_map(game);
 }
 
-//TODO moving player
-//TODO collecting stuff
-//TODO exit when exit
+//TODO exit when clicking on the top-right border cross
+//TODO count number of move
+//TODO adapt code to norm V3
+//TODO check leaks with valgrind
 int 	main (int argc, char** argv)
 {
 	t_game game;
@@ -154,6 +209,7 @@ int 	main (int argc, char** argv)
 	check_arg(argc, argv);
 	init_map(&game, argv[1]);
 	init_struc(&game);
+	draw_map(&game);
 	mlx_key_hook(game.mlx.mlx_win, key_hook, &game);
 	mlx_loop(game.mlx.mlx);
 
