@@ -14,8 +14,8 @@
 #define __FT_SO_LONG_H
 
 #include "libft.h"
-#include <mlx.h>
-#include <mlx_int.h>
+#include "../mlx/mlx.h"
+#include "../mlx/mlx_int.h"
 #include <stdio.h>
 
 typedef struct s_mlx

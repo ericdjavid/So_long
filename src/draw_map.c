@@ -12,7 +12,7 @@
 
 #include "../inc/so_long.h"
 
-void 	draw_square(t_game *game, t_img *img, int x, int y)
+void	draw_square(t_game *game, t_img *img, int x, int y)
 {
 	unsigned int	color;
 	int				i;
