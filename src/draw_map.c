@@ -71,22 +71,5 @@ void	draw_map(t_game *game)
 		y++;
 		numb = game->total_line_char * y;
 	}
-
-//	{
-//		x = 0;
-//		while (x < game->map_width)
-//		{
-//			if (game->map[x + numb] == '1')
-//				draw_square(game, game->tree, x, y);
-//			else
-//			{
-//				draw_square(game, game->ground, x, y);
-//				check_for_elements(game, x, y, numb);
-//			}
-//			x++;
-//		}
-//		y++;
-//		numb = game->total_line_char * y;
-//	}
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win, game->mlx.mlx_img, 0, 0);
 }

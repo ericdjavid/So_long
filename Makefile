@@ -5,6 +5,7 @@ SRC =   src/so_long.c               \
         src/map_errors.c            \
         src/draw_map.c              \
         src/utils.c                 \
+        src/key_hook.c              \
         gnl/get_next_line.c         \
         gnl/get_next_line_utils.c   \
 
@@ -19,7 +20,7 @@ $(NAME):
 	gcc $(FLAGS) -o $(NAME) $(SRC) $(LIB)
 
 skiperror:
-	gcc -o $(NAME) $(SRC) $(LIB)
+	gcc -o $(NAME) $(SRC) -g $(LIB)
 
 clean:
 	@rm -rf *.o

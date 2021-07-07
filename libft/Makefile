@@ -27,6 +27,7 @@ SRC =	./ft_atoi.c 		\
  		./ft_memmove.c 		\
 		./ft_memset.c 		\
  		./ft_strchr.c 		\
+ 		./ft_strcat.c       \
   		./ft_strlcpy.c 		\
  		./ft_strdup.c 		\
  		./ft_strjoin.c 		\
@@ -55,7 +56,7 @@ HDRS = libft.h
 all: $(NAME)
 
 $(NAME):
-	gcc -c -Wall -Wextra -Werror $(HDRS) $(SRC) 
+	gcc -c -Wall -Wextra -Werror $(HDRS) $(SRC)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 

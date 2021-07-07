@@ -68,7 +68,7 @@ int		get_next_line(int fd, char **line)
 	int				reader;
 
 	reader = 1;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+	if (fd < 0 || !line )
 		return (-1);
 	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);

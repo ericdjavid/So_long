@@ -26,7 +26,6 @@ typedef struct s_mlx
 
 } t_mlx;
 
-
 typedef struct s_coord
 {
 	int x;
@@ -48,14 +47,15 @@ typedef struct s_game
 	int 	total_line_char;
 	int 	line_number;
 	char 	*player_position;
-	int 	collected;
+	int 	nb_exit;
 
 } t_game;
 
-
+void			texture_load(t_game *game, t_img **img, char *path);
 void 			check_arg(int argc, char** argv);
 int				key_hook(int keycode, t_game *game);
-void			checkwalls(char *line);
+void			check_walls(char *line);
+void 			check_map_elements(char *whole_chars);
 int 			init_struc(t_game *game);
 int 			init_map(t_game *game, char *map_name);
 void			draw_map(t_game *game);
@@ -64,6 +64,6 @@ unsigned int	mlx_get_pixel(t_img *img, int x, int y);
 void			mlx_draw_pixel(t_img *mlx_img, int x, int y, int color);
 unsigned int	mlx_rgb_to_int(int o, int r, int g, int b);
 void			check_for_elements(t_game *game, int x, int y, int z, int numb);
-
+int				exit_hook(t_game *game);
 
 #endif
