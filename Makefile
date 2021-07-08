@@ -1,4 +1,4 @@
-NAME = SOLONG
+NAME = So_long
 LIBFT = libft/libft.a
 FLAGS = -Wall -Wextra -Werror
 SRC =   src/so_long.c               \
@@ -6,6 +6,7 @@ SRC =   src/so_long.c               \
         src/draw_map.c              \
         src/utils.c                 \
         src/key_hook.c              \
+        src/moves.c                 \
         gnl/get_next_line.c         \
         gnl/get_next_line_utils.c   \
 
@@ -17,7 +18,8 @@ LIB = -L ./libft -lft -L ./mlx -lmlx -lXext -lX11
 all: $(NAME)
 
 $(NAME):
-	gcc $(FLAGS) -o $(NAME) $(SRC) $(LIB)
+	cd mlx/ && ./configure
+	gcc -g3 -fsanitize=address $(FLAGS) -o $(NAME) $(SRC) $(LIB)
 
 skiperror:
 	gcc -o $(NAME) $(SRC) -g $(LIB)

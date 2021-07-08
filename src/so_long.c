@@ -127,7 +127,7 @@ int 	init_map(t_game *game, char *map_name)
 int 	init_struc(t_game *game)
 {
 	game->nb_exit = 0;
-	game->numb_move = 0;
+	game->numb_move = 1;
 	game->mlx.mlx = mlx_init();
 	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx, game->map_width, game->map_height, "SO_LONG_EDJ");
 	game->mlx.mlx_img = mlx_new_image(game->mlx.mlx, game->map_width, game->map_height);

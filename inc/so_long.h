@@ -48,7 +48,6 @@ typedef struct s_game
 	int 	line_number;
 	char 	*player_position;
 	int 	nb_exit;
-
 } t_game;
 
 void			texture_load(t_game *game, t_img **img, char *path);
@@ -65,5 +64,10 @@ void			mlx_draw_pixel(t_img *mlx_img, int x, int y, int color);
 unsigned int	mlx_rgb_to_int(int o, int r, int g, int b);
 void			check_for_elements(t_game *game, int x, int y, int z, int numb);
 int				exit_hook(t_game *game);
+void 			move_bottom(t_game *game);
+void 			move_left(t_game *game);
+void 			move_right(t_game *game);
+void 			move_up(t_game *game);
+void 			is_game_finished (t_game *game);
 
 #endif
