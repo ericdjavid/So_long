@@ -46,7 +46,7 @@ void	check_for_elements(t_game *game, int x, int y, int z, int numb)
 void	draw_map(t_game *game)
 {
 	int	x;
-	int y;
+	int	y;
 	int	numb;
 	int	z;
 
@@ -65,11 +65,11 @@ void	draw_map(t_game *game)
 				draw_square(game, game->ground, x += 40, y * 39);
 				check_for_elements(game, x, y, z, numb);
 			}
-		z++;
+			z++;
 		}
 		y++;
 		numb = game->total_line_char * y;
 	}
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win,
-						 game->mlx.mlx_img, 0, 0);
+		game->mlx.mlx_img, 0, 0);
 }

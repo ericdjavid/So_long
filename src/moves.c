@@ -12,10 +12,10 @@
 
 #include "../inc/so_long.h"
 
-void 	move_bottom(t_game *game)
+void	move_bottom(t_game *game)
 {
-	char *ptr;
-	int i;
+	char	*ptr;
+	int	i;
 
 	ptr = strchr(game->map, 'P');
 	i = -1;
@@ -32,10 +32,13 @@ void 	move_bottom(t_game *game)
 	game->numb_move += 1;
 }
 
-void 	move_up(t_game *game)
+void	move_up(t_game *game)
 {
-	char *ptr = ft_strchr(game->map, 'P');
-	int i = -1;
+	char	*ptr;
+	int	i;
+
+	i = -1;
+	ptr = ft_strchr(game->map, 'P');
 	while (++i < game->total_line_char)
 		--ptr;
 	if (*ptr != '1' && *ptr != 'E')
@@ -50,9 +53,11 @@ void 	move_up(t_game *game)
 	game->numb_move += 1;
 }
 
-void 	move_right(t_game *game)
+void	move_right(t_game *game)
 {
-	char *ptr = ft_strchr(game->map, 'P');
+	char	*ptr;
+
+	ptr = ft_strchr(game->map, 'P');
 	if ((*++ptr != '1' && *ptr != 'E'))
 	{
 		*--ptr = '0';
@@ -63,9 +68,11 @@ void 	move_right(t_game *game)
 	game->numb_move += 1;
 }
 
-void 	move_left(t_game *game)
+void	move_left(t_game *game)
 {
-	char *ptr = ft_strchr(game->map, 'P');
+	char	*ptr;
+
+	ptr = ft_strchr(game->map, 'P');
 	if (*--ptr != '1' && *ptr != 'E')
 	{
 		*++ptr = '0';

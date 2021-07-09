@@ -12,23 +12,23 @@
 
 #include "../inc/so_long.h"
 
-int		exit_hook(t_game *game)
+int	exit_hook(t_game *game)
 {
 	free(game->map);
 	exit(1);
 }
 
-void 	is_game_finished (t_game *game)
+void	is_game_finished(t_game *game)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	count = 0;
 	i = 0;
 	if (ft_strchr(game->map, 'E') == NULL)
 	{
 		if (game->nb_exit <= 1)
-			if(ft_strchr(game->map, 'X') == NULL)
+			if (ft_strchr(game->map, 'X') == NULL)
 				exit_hook(game);
 		while (game->map[i])
 		{
@@ -41,16 +41,18 @@ void 	is_game_finished (t_game *game)
 	}
 }
 
-int		key_hook(int keycode, t_game *game)
+int	key_hook(int keycode, t_game *game)
 {
 	ft_putnbr_fd(game->numb_move, 1);
 	ft_putchar_fd('\n', 1);
 	if (ft_strchr(game->map, 'C') == NULL)
+	{
 		while (ft_strchr(game->map, 'E'))
 		{
 			game->nb_exit++;
 			*ft_strchr(game->map, 'E') = 'X';
 		}
+	}	
 	if (keycode == 65307)
 		exit_hook(game);
 	if (keycode == 97)

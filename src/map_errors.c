@@ -29,17 +29,19 @@ void	check_walls(char *line)
 	}
 }
 
-void 	check_map_elements(char *whole_chars)
+void	check_map_elements(char *whole_chars)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (whole_chars[i] != '\0')
 	{
-		if((whole_chars[i] != '1') && (whole_chars[i] != '0') && (whole_chars[i] != 'E')
-		&& (whole_chars[i] != 'P') && (whole_chars[i] != 'C'))
+		if ((whole_chars[i] != '1') && (whole_chars[i] != '0')
+			&& (whole_chars[i] != 'E') && (whole_chars[i] != 'P')
+			&& (whole_chars[i] != 'C'))
 		{
-			ft_putendl_fd("Error\nFile contains different character than 1, 0, P, E or C", 2);
+			ft_putendl_fd
+			("Error\nFile contains different character than 1, 0, P, E or C", 2);
 			free(whole_chars);
 			exit (1);
 		}

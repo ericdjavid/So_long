@@ -34,14 +34,14 @@ static void	texture_init(t_game *game)
 	texture_load(game, &game->ground, "./img/ground.xpm");
 }
 
-void 	check_arg(int argc, char** argv)
+void	check_arg(int argc, char **argv)
 {
 	if (argc != 2)
 	{
 		ft_putendl_fd("Error\nInvalid number of argument", 2);
 		exit(0);
 	}
-	if ((ft_strlen(argv[1]) < 4) || (!ft_strrchr(argv[1],'.')))
+	if ((ft_strlen(argv[1]) < 4) || (!ft_strrchr(argv[1], '.')))
 	{
 		ft_putendl_fd("Error\ninvalid argument", 2);
 		exit(0);
@@ -53,14 +53,15 @@ void 	check_arg(int argc, char** argv)
 	}
 }
 
-int 	init_map(t_game *game, char *map_name)
+int	init_map(t_game *game, char *map_name)
 {
-	int 	fd;
+	int	fd;
 	char	*line;
-	int 	ret;
-	int 	count;
-	int 	first_line_char_sum;
-	char 	*whole_chars;
+	int	ret;
+	int	count;
+	int	first_line_char_sum;
+	char	*whole_chars;
+	int	endline;
 
 	whole_chars = malloc(sizeof(char) * 10000);
 	*whole_chars = 0;
@@ -79,7 +80,7 @@ int 	init_map(t_game *game, char *map_name)
 	while (ret > 0)
 	{
 		count++;
-		int endline = ft_strlen(line) - 1;
+		endline = ft_strlen(line) - 1;
 		if (line[0] != '1' || line[endline] != '1')
 		{
 			ft_putendl_fd("Error\nWall missing in the border", 2);
@@ -105,10 +106,12 @@ int 	init_map(t_game *game, char *map_name)
 			line = 0;
 		}
 	}
-	if ((ft_strchr(whole_chars, 'P') == NULL) || (ft_strchr(whole_chars, 'E') == NULL) ||
-	(ft_strchr(whole_chars, 'C') == NULL))
+	if ((ft_strchr(whole_chars, 'P') == NULL)
+		|| (ft_strchr(whole_chars, 'E') == NULL)
+		|| (ft_strchr(whole_chars, 'C') == NULL))
 	{
-		ft_putendl_fd("Error\nMissing one player, one collectible or one exit", 2);
+		ft_putendl_fd
+		("Error\nMissing one player, one collectible or one exit", 2);
 		free(whole_chars);
 		exit (0);
 	}
@@ -124,13 +127,15 @@ int 	init_map(t_game *game, char *map_name)
 	return (1);
 }
 
-int 	init_struc(t_game *game)
+int	init_struc(t_game *game)
 {
 	game->nb_exit = 0;
 	game->numb_move = 1;
 	game->mlx.mlx = mlx_init();
-	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx, game->map_width, game->map_height, "SO_LONG_EDJ");
-	game->mlx.mlx_img = mlx_new_image(game->mlx.mlx, game->map_width, game->map_height);
+	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx,
+			game->map_width, game->map_height, "SO_LONG_EDJ");
+	game->mlx.mlx_img = mlx_new_image
+		(game->mlx.mlx, game->map_width, game->map_height);
 	texture_init(game);
 	return (1);
 }
@@ -139,12 +144,12 @@ int	reduce_window(t_game *game)
 {
 	draw_map(game);
 	return (1);
-}	
+}
 
 //TODO adapt code to norm V3
-int 	main (int argc, char** argv)
+int	main(int argc, char **argv)
 {
-	t_game game;
+	t_game	game;
 
 	check_arg(argc, argv);
 	init_map(&game, argv[1]);
