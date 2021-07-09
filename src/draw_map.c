@@ -33,24 +33,28 @@ void	draw_square(t_game *game, t_img *img, int x, int y)
 	}
 }
 
-void	check_for_elements(t_game *game, int x, int y, int z, int numb)
+void	check_for_elements(t_game *game, int x, int y, int z)
 {
-	if (game->map[z + numb] == 'P')
+	if (game->map[z + game->numb] == 'P')
 		draw_square(game, game->player, x, y * 40);
-	if (game->map[z + numb] == 'C')
+	if (game->map[z + game->numb] == 'C')
 		draw_square(game, game->collectible, x, y * 40);
-	if (game->map[z + numb] == 'E' || game->map[z + numb] == 'X')
+	if (game->map[z + game->numb] == 'E' || game->map[z + game->numb] == 'X')
 		draw_square(game, game->exit, x, y * 40);
+}
+
+void	draw_map2(t_game *game)
+{
+	
 }
 
 void	draw_map(t_game *game)
 {
 	int	x;
 	int	y;
-	int	numb;
 	int	z;
 
-	numb = 0;
+	game->numb = 0;
 	y = 0;
 	x = -40;
 	while (y < game->line_number)
@@ -58,17 +62,17 @@ void	draw_map(t_game *game)
 		z = 0;
 		while (z < (game->total_line_char))
 		{
-			if (game->map[z + numb] == '1')
+			if (game->map[z + game->numb] == '1')
 				draw_square(game, game->tree, x += 40, y * 39);
 			else
 			{
 				draw_square(game, game->ground, x += 40, y * 39);
-				check_for_elements(game, x, y, z, numb);
+				check_for_elements(game, x, y, z);
 			}
 			z++;
 		}
 		y++;
-		numb = game->total_line_char * y;
+		game->numb = game->total_line_char * y;
 	}
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win,
 		game->mlx.mlx_img, 0, 0);

@@ -15,7 +15,7 @@
 void	move_bottom(t_game *game)
 {
 	char	*ptr;
-	int	i;
+	int		i;
 
 	ptr = strchr(game->map, 'P');
 	i = -1;
@@ -35,7 +35,7 @@ void	move_bottom(t_game *game)
 void	move_up(t_game *game)
 {
 	char	*ptr;
-	int	i;
+	int		i;
 
 	i = -1;
 	ptr = ft_strchr(game->map, 'P');

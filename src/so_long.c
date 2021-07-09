@@ -55,13 +55,13 @@ void	check_arg(int argc, char **argv)
 
 int	init_map(t_game *game, char *map_name)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-	int	ret;
-	int	count;
-	int	first_line_char_sum;
+	int		ret;
+	int		count;
+	int		first_line_char_sum;
 	char	*whole_chars;
-	int	endline;
+	int		endline;
 
 	whole_chars = malloc(sizeof(char) * 10000);
 	*whole_chars = 0;
@@ -146,7 +146,6 @@ int	reduce_window(t_game *game)
 	return (1);
 }
 
-//TODO adapt code to norm V3
 int	main(int argc, char **argv)
 {
 	t_game	game;
