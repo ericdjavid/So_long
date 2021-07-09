@@ -135,6 +135,12 @@ int 	init_struc(t_game *game)
 	return (1);
 }
 
+int	reduce_window(t_game *game)
+{
+	draw_map(game);
+	return (1);
+}	
+
 //TODO adapt code to norm V3
 int 	main (int argc, char** argv)
 {
@@ -145,7 +151,7 @@ int 	main (int argc, char** argv)
 	init_struc(&game);
 	draw_map(&game);
 	mlx_key_hook(game.mlx.mlx_win, key_hook, &game);
-	mlx_hook(game.mlx.mlx_win, 33, 1L << 17, exit_hook, &game);
+	mlx_hook(game.mlx.mlx_win, 33, 1L << 5, exit_hook, &game);
+	mlx_hook(game.mlx.mlx_win, 15, 1L << 16, reduce_window, &game);
 	mlx_loop(game.mlx.mlx);
-
 }
