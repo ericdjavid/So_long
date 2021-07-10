@@ -36,17 +36,17 @@ void	draw_square(t_game *game, t_img *img, int x, int y)
 void	check_for_elements(t_game *game, int x, int y, int z)
 {
 	if (game->map[z + game->numb] == 'P')
-		draw_square(game, game->player, x, y * 40);
+		draw_square(game, game->player, x, y * 39);
 	if (game->map[z + game->numb] == 'C')
-		draw_square(game, game->collectible, x, y * 40);
+		draw_square(game, game->collectible, x, y * 39);
 	if (game->map[z + game->numb] == 'E' || game->map[z + game->numb] == 'X')
-		draw_square(game, game->exit, x, y * 40);
+		draw_square(game, game->exit, x, y * 39);
 }
 
-void	draw_map2(t_game *game)
-{
-	
-}
+//void	draw_map2(t_game *game)
+//{
+//
+//}
 
 void	draw_map(t_game *game)
 {

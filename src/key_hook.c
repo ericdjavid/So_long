@@ -43,8 +43,6 @@ void	is_game_finished(t_game *game)
 
 int	key_hook(int keycode, t_game *game)
 {
-	ft_putnbr_fd(game->numb_move, 1);
-	ft_putchar_fd('\n', 1);
 	if (ft_strchr(game->map, 'C') == NULL)
 	{
 		while (ft_strchr(game->map, 'E'))

@@ -26,10 +26,12 @@ void	move_bottom(t_game *game)
 		*ptr = 'P';
 		ptr = ft_strchr(game->map, 'P');
 		*ptr = '0';
+		game->numb_move += 1;
+		ft_putnbr_fd(game->numb_move, 1);
+		ft_putchar_fd('\n', 1);
 	}
 	mlx_destroy_image(game->mlx.mlx, game->player);
 	texture_load(game, &game->player, "./img/link1.xpm");
-	game->numb_move += 1;
 }
 
 void	move_up(t_game *game)
@@ -47,10 +49,12 @@ void	move_up(t_game *game)
 		while (--i >= 0)
 			++ptr;
 		*ptr = '0';
+		game->numb_move += 1;
+		ft_putnbr_fd(game->numb_move, 1);
+		ft_putchar_fd('\n', 1);
 	}
 	mlx_destroy_image(game->mlx.mlx, game->player);
 	texture_load(game, &game->player, "./img/link_up.xpm");
-	game->numb_move += 1;
 }
 
 void	move_right(t_game *game)
@@ -62,10 +66,12 @@ void	move_right(t_game *game)
 	{
 		*--ptr = '0';
 		*++ptr = 'P';
+		game->numb_move += 1;
+		ft_putnbr_fd(game->numb_move, 1);
+		ft_putchar_fd('\n', 1);
 	}
 	mlx_destroy_image(game->mlx.mlx, game->player);
 	texture_load(game, &game->player, "./img/link_right.xpm");
-	game->numb_move += 1;
 }
 
 void	move_left(t_game *game)
@@ -77,8 +83,10 @@ void	move_left(t_game *game)
 	{
 		*++ptr = '0';
 		*--ptr = 'P';
+		game->numb_move += 1;
+		ft_putnbr_fd(game->numb_move, 1);
+		ft_putchar_fd('\n', 1);
 	}
 	mlx_destroy_image(game->mlx.mlx, game->player);
 	texture_load(game, &game->player, "./img/link_left.xpm");
-	game->numb_move += 1;
 }
