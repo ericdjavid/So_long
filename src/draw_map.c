@@ -43,36 +43,29 @@ void	check_for_elements(t_game *game, int x, int y, int z)
 		draw_square(game, game->exit, x, y * 39);
 }
 
-//void	draw_map2(t_game *game)
-//{
-//
-//}
-
 void	draw_map(t_game *game)
 {
-	int	x;
-	int	y;
 	int	z;
 
 	game->numb = 0;
-	y = 0;
-	x = -40;
-	while (y < game->line_number)
+	game->y = 0;
+	game->x = -40;
+	while (game->y < (game->line_number - 1))
 	{
 		z = 0;
-		while (z < (game->total_line_char))
+		while (z < game->total_line_char)
 		{
 			if (game->map[z + game->numb] == '1')
-				draw_square(game, game->tree, x += 40, y * 39);
+				draw_square(game, game->tree, game->x += 40, game->y * 39);
 			else
 			{
-				draw_square(game, game->ground, x += 40, y * 39);
-				check_for_elements(game, x, y, z);
+				draw_square(game, game->ground, game->x += 40, game->y * 39);
+				check_for_elements(game, game->x, game->y, z);
 			}
 			z++;
 		}
-		y++;
-		game->numb = game->total_line_char * y;
+		game->y++;
+		game->numb = game->total_line_char * game->y;
 	}
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win,
 		game->mlx.mlx_img, 0, 0);

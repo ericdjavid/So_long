@@ -2,7 +2,7 @@ NAME = So_long
 LIBFT = libft/libft.a
 FLAGS = -Wall -Wextra -Werror
 SRC =   src/so_long.c               \
-        src/map_errors.c            \
+        src/errors.c            \
         src/draw_map.c              \
         src/utils.c                 \
         src/key_hook.c              \

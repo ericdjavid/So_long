@@ -49,6 +49,10 @@ typedef struct s_game
 	char	*player_position;
 	int		nb_exit;
 	int		numb;
+	int 	endline;
+	int 	fd;
+	int 	x;
+	int 	y;
 }	t_game;
 
 void			texture_load(t_game *game, t_img **img, char *path);
@@ -70,5 +74,7 @@ void			move_left(t_game *game);
 void			move_right(t_game *game);
 void			move_up(t_game *game);
 void			is_game_finished(t_game *game);
-
+void			texture_init(t_game *game);
+int				reduce_window(t_game *game);
+void			problems(char *nature, char *whole_chars);
 #endif

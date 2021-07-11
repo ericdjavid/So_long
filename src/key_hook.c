@@ -41,6 +41,12 @@ void	is_game_finished(t_game *game)
 	}
 }
 
+int	reduce_window(t_game *game)
+{
+	draw_map(game);
+	return (1);
+}
+
 int	key_hook(int keycode, t_game *game)
 {
 	if (ft_strchr(game->map, 'C') == NULL)
