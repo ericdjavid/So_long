@@ -13,24 +13,27 @@
 #include "../inc/so_long.h"
 #include "../inc/get_next_line.h"
 
-void 	init_map2(t_game *game, char *whole_chars)
+void	init_map2(t_game *game, char *whole_chars)
 {
 	if ((ft_strchr(whole_chars, 'P') == NULL)
-	 || (ft_strchr(whole_chars, 'E') == NULL)
-	 || (ft_strchr(whole_chars, 'C') == NULL))
-		problems("Error\nMissing one player, one collectible or one exit", whole_chars);
+		|| (ft_strchr(whole_chars, 'E') == NULL)
+		|| (ft_strchr(whole_chars, 'C') == NULL))
+		problems("Error\nMissing one player, one collectible or one exit",
+			whole_chars);
 	if (game->line_number == game->total_line_char)
 		problems("Error\nMap is square!", whole_chars);
 	check_map_elements(whole_chars);
 	game->map_height = (game->line_number - 1) * 40;
 	game->map_width = game->total_line_char * 40;
-	game->map = malloc(sizeof(char) * (game->total_line_char * game->line_number) + 1);
-	ft_strlcpy(game->map, whole_chars, (game->line_number * game->total_line_char));
+	game->map = malloc(sizeof(char)
+			* (game->total_line_char * game->line_number) + 1);
+	ft_strlcpy(game->map, whole_chars,
+		(game->line_number * game->total_line_char));
 	game->fd = close(game->fd);
 	free(whole_chars);
 }
 
-void 	deal_ret(int ret, t_game *game, char *line, char *whole_chars)
+void	deal_ret(int ret, t_game *game, char *line, char *whole_chars)
 {
 	while (ret > 0)
 	{
@@ -42,7 +45,8 @@ void 	deal_ret(int ret, t_game *game, char *line, char *whole_chars)
 		free(line);
 		line = 0;
 		ret = get_next_line(game->fd, &line);
-		if ((ret != 0) && (strlen(line) != (long unsigned int)game->total_line_char))
+		if ((ret != 0) && (strlen(line)
+				!= (long unsigned int)game->total_line_char))
 			problems("Error\nmap has a problem", whole_chars);
 		if (ret == 0)
 		{
@@ -55,7 +59,7 @@ void 	deal_ret(int ret, t_game *game, char *line, char *whole_chars)
 	}
 }
 
-int		init_map(t_game *game, char *map_name)
+int	init_map(t_game *game, char *map_name)
 {
 	char	*line;
 	int		ret;

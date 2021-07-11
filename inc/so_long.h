@@ -49,10 +49,10 @@ typedef struct s_game
 	char	*player_position;
 	int		nb_exit;
 	int		numb;
-	int 	endline;
-	int 	fd;
-	int 	x;
-	int 	y;
+	int		endline;
+	int		fd;
+	int		x;
+	int		y;
 }	t_game;
 
 void			texture_load(t_game *game, t_img **img, char *path);
