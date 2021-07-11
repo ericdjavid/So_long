@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 
-size_t			ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	char		*d;
 	const char	*s;
@@ -26,7 +26,8 @@ size_t			ft_strlcpy(char *dst, const char *src, size_t size)
 	{
 		while (--n != 0)
 		{
-			if ((*d++ = *s++) == '\0')
+			*d++ = *s++;
+			if (*d == '\0')
 				break ;
 		}
 	}

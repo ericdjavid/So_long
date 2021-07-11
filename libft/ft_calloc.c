@@ -13,13 +13,14 @@
 #include "libft.h"
 #include <string.h>
 
-void				*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned int	s;
 	char			*ptr;
 
 	s = nmemb * size;
-	if ((ptr = malloc(s)) == NULL)
+	ptr = malloc(s);
+	if (ptr == NULL)
 		return (NULL);
 	ft_memset(ptr, 0, s);
 	return (ptr);

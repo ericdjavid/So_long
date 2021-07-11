@@ -14,14 +14,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-static int			ft_count(char const *s, int cnts)
+static int	ft_count(char const *s, int cnts)
 {
 	while (s[cnts])
 		cnts++;
 	return (cnts);
 }
 
-char				*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	unsigned int	cnts1;
 	unsigned int	cnts2;
@@ -33,7 +33,8 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	cnts2 = 0;
 	cnts1 = ft_count(s1, cnts1);
 	cnts2 = ft_count(s2, cnts2);
-	if (!(str = malloc(sizeof(char) * (cnts1 + cnts2 + 1))))
+	str = malloc(sizeof(char) * (cnts1 + cnts2 + 1));
+	if (!str)
 		return (NULL);
 	i = -1;
 	while (++i < cnts1)

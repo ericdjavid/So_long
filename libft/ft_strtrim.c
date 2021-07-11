@@ -24,6 +24,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_s = ft_strlen(s1);
 	while (size_s && ft_strchr(set, s1[size_s]))
 		size_s--;
-	newstring = ft_substr((char*)s1, 0, size_s + 1);
+	newstring = ft_substr((char *)s1, 0, size_s + 1);
 	return (newstring);
 }

@@ -29,7 +29,8 @@ char	*get_statik(char *statik)
 		free(statik);
 		return (0);
 	}
-	if (!(rtn = malloc(sizeof(char) * ((ft_strlen(statik) - i) + 1))))
+	rtn = malloc(sizeof(char) * ((ft_strlen(statik) - i) + 1));
+	if (!rtn)
 		return (0);
 	i++;
 	while (statik[i])
@@ -49,7 +50,8 @@ char	*get_line(char *str)
 		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (!(rtn = malloc(sizeof(char) * (i + 1))))
+	rtn = malloc(sizeof(char) * (i + 1));
+	if (!rtn)
 		return (0);
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -61,20 +63,20 @@ char	*get_line(char *str)
 	return (rtn);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	char			*buff;
 	static char		*statik;
 	int				reader;
 
 	reader = 1;
-	if (fd < 0 || !line )
+	if (fd < 0 || !line)
 		return (-1);
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (-1);
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	while (!has_return(statik) && reader != 0)
 	{
-		if ((reader = read(fd, buff, BUFFER_SIZE)) == -1)
+		reader = read(fd, buff, BUFFER_SIZE);
+		if (reader == -1)
 		{
 			free(buff);
 			return (-1);

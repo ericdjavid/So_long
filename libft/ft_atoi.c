@@ -13,10 +13,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int nb;
-	int sign;
+	int	nb;
+	int	sign;
 
 	sign = 1;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
