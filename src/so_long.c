@@ -20,7 +20,7 @@ void	init_map2(t_game *game, char *whole_chars)
 		|| (ft_strchr(whole_chars, 'C') == NULL))
 		problems("Error\nMissing one player, one collectible or one exit",
 			whole_chars);
-	if (game->line_number == game->total_line_char)
+	if (game->line_number - 1 == game->total_line_char)
 		problems("Error\nMap is square!", whole_chars);
 	check_map_elements(whole_chars);
 	game->map_height = (game->line_number - 1) * 40;

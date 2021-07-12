@@ -39,10 +39,14 @@ void	check_walls(char *line)
 void	check_map_elements(char *whole_chars)
 {
 	int	i;
+	int	count_p;
 
 	i = 0;
+	count_p = 0;
 	while (whole_chars[i] != '\0')
 	{
+		if (whole_chars[i] == 'P')
+			count_p++;
 		if ((whole_chars[i] != '1') && (whole_chars[i] != '0')
 			&& (whole_chars[i] != 'E') && (whole_chars[i] != 'P')
 			&& (whole_chars[i] != 'C'))
@@ -54,6 +58,8 @@ void	check_map_elements(char *whole_chars)
 		}
 		i++;
 	}
+	if (count_p > 1)
+		problems("only one player should be on the map", whole_chars);
 }
 
 void	check_arg(int argc, char **argv)
